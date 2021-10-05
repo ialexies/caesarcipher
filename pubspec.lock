@@ -15,6 +15,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  bordered_text:
+    dependency: "direct main"
+    description:
+      name: bordered_text
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   characters:
     dependency: transitive
     description:
@@ -74,11 +81,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_web_plugins:
-    dependency: transitive
-    description: flutter
-    source: sdk
-    version: "0.0.0"
   get_it:
     dependency: "direct main"
     description:
@@ -86,20 +88,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "7.2.0"
-  hexcolor:
-    dependency: "direct main"
-    description:
-      name: hexcolor
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.5"
-  js:
-    dependency: transitive
-    description:
-      name: js
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.6.3"
   lints:
     dependency: transitive
     description:
@@ -107,13 +95,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
-  liquid_swipe:
-    dependency: "direct main"
-    description:
-      name: liquid_swipe
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.1"
   matcher:
     dependency: transitive
     description:
@@ -128,13 +109,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.0"
-  nested:
-    dependency: transitive
-    description:
-      name: nested
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0"
   path:
     dependency: transitive
     description:
@@ -142,13 +116,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
-  provider:
-    dependency: transitive
-    description:
-      name: provider
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "6.0.1"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -212,4 +179,3 @@ packages:
     version: "2.1.0"
 sdks:
   dart: ">=2.12.0 <3.0.0"
-  flutter: ">=2.0.1"

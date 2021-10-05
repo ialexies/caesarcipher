@@ -1,5 +1,5 @@
-import 'package:caesarcipher/encode/view/encode_view.dart';
-import 'package:caesarcipher/validate/view/validated_view.dart';
+import 'package:caesarcipher/app/modules/encode/view/encode_view.dart';
+import 'package:caesarcipher/app/modules/validate/view/validated_view.dart';
 import 'package:flutter/material.dart';
 // import 'package:liquid_swipe/liquid_swipe.dart';
 

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bordered_text/bordered_text.dart';
+import 'package:flutter/painting.dart';
 
 class EncodeView extends StatefulWidget {
   const EncodeView({Key? key}) : super(key: key);
@@ -129,58 +130,56 @@ class _EncodeViewState extends State<EncodeView> {
                         horizontal: 20,
                         vertical: 20,
                       ),
-                      child: Expanded(
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    padding: const EdgeInsets.all(8),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                    side: const BorderSide(color: Colors.white),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  padding: const EdgeInsets.all(8),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
                                   ),
-                                  onPressed: () {},
-                                  child: const Text(
-                                    'Generate Phrase',
-                                    style: TextStyle(fontSize: 10),
-                                  ),
+                                  side: const BorderSide(color: Colors.white),
                                 ),
-                                const SizedBox(
-                                  width: 10,
+                                onPressed: () {},
+                                child: const Text(
+                                  'Generate Phrase',
+                                  style: TextStyle(fontSize: 10),
                                 ),
-                                const Center(
-                                  child: Text(
-                                    'Words: 4',
-                                    style: TextStyle(fontSize: 14),
-                                  ),
-                                )
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: TextField(
-                                    minLines: 3,
-                                    maxLines: 8,
-                                    keyboardType: TextInputType.multiline,
-                                    // maxLines: null,
-                                    decoration: InputDecoration(
-                                      filled: true,
-                                      fillColor: Colors.white70,
-                                      border: OutlineInputBorder(
-                                        borderSide:
-                                            new BorderSide(color: Colors.white),
-                                      ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              const Center(
+                                child: Text(
+                                  'Words: 4',
+                                  style: TextStyle(fontSize: 14),
+                                ),
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: TextField(
+                                  minLines: 3,
+                                  maxLines: 8,
+                                  keyboardType: TextInputType.multiline,
+                                  // maxLines: null,
+                                  decoration: InputDecoration(
+                                    filled: true,
+                                    fillColor: Colors.white70,
+                                    border: OutlineInputBorder(
+                                      borderSide:
+                                          new BorderSide(color: Colors.white),
                                     ),
                                   ),
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                     margin: EdgeInsets.only(top: 180),
@@ -204,7 +203,8 @@ class _EncodeViewState extends State<EncodeView> {
                         child: Text(
                           'CLICK THE BUTTON GENERAGE PHRASE',
                           textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.headline5,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 25),
                         ),
                       )),
                     ),

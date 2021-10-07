@@ -10,6 +10,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
 
 class EncoderInputGroup extends StatelessWidget with GetItMixin {
+  static final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final getCaeserCipherWords =
@@ -18,7 +19,6 @@ class EncoderInputGroup extends StatelessWidget with GetItMixin {
 
     TextEditingController numWordsController = TextEditingController();
     TextEditingController wordsController = TextEditingController();
-    final _formKey = GlobalKey<FormState>();
 
     wordsController.text = getCaeserCipherWords.join(" ");
     numWordsController.text = getCaeserCipherShift.toString();

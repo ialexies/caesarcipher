@@ -6,9 +6,8 @@ class Encodecontroller {
 
   generateWords(int numWords) async {
     try {
-      CaesarCipher response = await CaesarService().getPhraseAndShfit();
+      CaesarCipher response = await CaesarService().getPhraseAndShfit(numWords);
 
-      print(response.toString());
       return response;
     } finally {}
   }

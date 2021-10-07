@@ -6,8 +6,8 @@ import 'package:caesarcipher/app/modules/encode/model/caesarcipher.dart';
 class CaesarService {
   Repository repository = Repository();
 
-  getWordsToEncode() async {
-    var response = await repository.httpGetWords();
+  getWordsToEncode(int numWords) async {
+    var response = await repository.httpGetWords(numWords);
     var jsonResponse = json.decode(response.body);
 
     return jsonResponse;
@@ -20,8 +20,8 @@ class CaesarService {
     return jsonResponse[0];
   }
 
-  getPhraseAndShfit() async {
-    List words = await getWordsToEncode();
+  getPhraseAndShfit(int numWords) async {
+    List words = await getWordsToEncode(numWords);
 
     // print(dsd;
     int shift = await getShiftToEncode();

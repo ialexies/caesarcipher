@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
 import 'app/modules/home/view/home_view.dart';
+import 'locator.dart';
 
 void main() {
+  setup();
   runApp(const MyApp());
 }
 

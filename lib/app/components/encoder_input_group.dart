@@ -1,34 +1,28 @@
 import 'package:caesarcipher/app/constants/box_decorations.dart';
+import 'package:caesarcipher/app/modules/encode/controller/encode_controller.dart';
+import 'package:caesarcipher/app/modules/encode/model/caesarcipher.dart';
+import 'package:caesarcipher/cipher_notifier.dart';
 import 'package:flutter/material.dart';
-import 'package:caesarcipher/app/components/comp_rounded_button.dart';
-import 'package:caesarcipher/app/components/textfield_encoder_input.dart';
+
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class EncoderInputGroup extends StatefulWidget {
-  EncoderInputGroup({
-    Key? key,
-  }) : super(key: key);
+import 'package:get_it_mixin/get_it_mixin.dart';
 
-  @override
-  State<EncoderInputGroup> createState() => _EncoderInputGroupState();
-}
-
-class _EncoderInputGroupState extends State<EncoderInputGroup> {
-  TextEditingController numWordsController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
-  final snackBar = SnackBar(content: Text('Yay! A SnackBar!'));
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    numWordsController.text = "1";
-
-    super.initState();
-  }
-
+class EncoderInputGroup extends StatelessWidget with GetItMixin {
   @override
   Widget build(BuildContext context) {
+    final getCaeserCipherWords =
+        watchOnly((GetItCipherNotifier x) => x.wordings);
+    final getCaeserCipherShift = watchOnly((GetItCipherNotifier x) => x.shift);
+
+    TextEditingController numWordsController = TextEditingController();
+    TextEditingController wordsController = TextEditingController();
+    final _formKey = GlobalKey<FormState>();
+
+    wordsController.text = getCaeserCipherWords.join(" ");
+    numWordsController.text = getCaeserCipherShift.toString();
+
     return Container(
       child: Padding(
         padding: const EdgeInsets.symmetric(
@@ -41,47 +35,24 @@ class _EncoderInputGroupState extends State<EncoderInputGroup> {
             children: [
               Row(
                 children: [
-                  // const CompRoundedButton(
-                  //   btnTitle: "Generate Phrase",
-                  //   bgColor: Colors.blue,
-                  //   outlineColor: Colors.white,
-                  // ),
-
-                  // const SizedBox(
-                  //   width: 15,
-                  // ),
-                  // const Center(
-                  //   child: Text(
-                  //     'Words:   ',
-                  //     style: TextStyle(fontSize: 14),
-                  //   ),
-                  // ),
                   Expanded(
                     child: TextFormField(
                       validator: (val) {
                         if (val!.isEmpty) {
                           return "Enter Number of Words";
                         } else if (int.parse(val.trim()) < 1) {
-                          // print("Invalid Number of Words");
                           return "Minimum of 1";
-                          // return null;
                         } else if (int.parse(val.trim()) > 5) {
-                          // print("Numbers too long, max of 5");
                           return "Numbers too long, max of 5";
-                          // return null;
                         } else {}
                       },
-
                       autovalidate: true,
-
                       textAlign: TextAlign.center,
                       controller: numWordsController,
                       keyboardType:
                           TextInputType.numberWithOptions(decimal: false),
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                      // minLines: 1,
                       maxLines: 1,
-                      // decoration: BoxDecorations().decoration_encoder_input_words(),
                       decoration: InputDecoration(
                         hintText: "Enter Number of words to generate",
                         hintStyle: TextStyle(fontSize: 8),
@@ -106,6 +77,7 @@ class _EncoderInputGroupState extends State<EncoderInputGroup> {
                 children: [
                   Expanded(
                     child: TextField(
+                      controller: wordsController,
                       minLines: 3,
                       maxLines: 8,
                       keyboardType: TextInputType.multiline,
@@ -124,12 +96,14 @@ class _EncoderInputGroupState extends State<EncoderInputGroup> {
                   primary: Colors.blue,
                   side: BorderSide(color: Colors.white),
                 ),
-                onPressed: () {
-                  // print(numWordsController.text);
-
+                onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     if (_formKey.currentState!.validate()) {
-                      print(numWordsController.text);
+                      // print(numWordsController.text);
+
+                      CaesarCipher response = await Encodecontroller()
+                          .generateWords(int.parse(numWordsController.text));
+                      get<GetItCipherNotifier>().generateWords(response);
                     }
 
                     // ScaffoldMessenger.of(context).showSnackBar(
@@ -150,6 +124,7 @@ class _EncoderInputGroupState extends State<EncoderInputGroup> {
                   style: const TextStyle(fontSize: 10),
                 ),
               ),
+              // Text(getCaeserCipherWords.toString()),
             ],
           ),
         ),

@@ -1,5 +1,6 @@
 import 'package:caesarcipher/app/components/encoder_input_group.dart';
 import 'package:caesarcipher/app/components/header.dart';
+import 'package:caesarcipher/app/components/result_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bordered_text/bordered_text.dart';
@@ -44,29 +45,5 @@ class _EncodeViewState extends State<EncodeView> {
             ),
           ],
         ));
-  }
-}
-
-class ResultText extends StatelessWidget {
-  ResultText({
-    this.textResult = "Click the button generate phrase",
-    Key? key,
-  }) : super(key: key);
-
-  String textResult;
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Center(
-          child: Padding(
-        padding: EdgeInsets.all(30.0),
-        child: Text(
-          // 'CLICK THE BUTTON GENERAGE PHRASE',
-          textResult.toUpperCase(),
-          textAlign: TextAlign.center,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-        ),
-      )),
-    );
   }
 }

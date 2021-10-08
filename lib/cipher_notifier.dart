@@ -6,9 +6,12 @@ import 'package:flutter/widgets.dart';
 
 class GetItCipherNotifier extends ChangeNotifier {
   CaesarCipher _caesarCipher = CaesarCipher([], 0, false);
+  List _generatePhrase = [];
   List _currentEncoded = [];
   int _numWords = 0;
   bool _isLoading = false;
+
+  String _checkerUserAnswer = "ss";
 
   generateWords(CaesarCipher response) {
     _caesarCipher.words = response.words;
@@ -16,6 +19,8 @@ class GetItCipherNotifier extends ChangeNotifier {
 
     updateCurrentEncoded(
         EncoderDecoderController().caesarCipherEncoder(response.words, shift));
+
+    _generatePhrase = response.words;
 
     return notifyListeners();
   }
@@ -35,9 +40,16 @@ class GetItCipherNotifier extends ChangeNotifier {
     return notifyListeners();
   }
 
+  updateCheckerUserAnswer(String userAnswer) {
+    _checkerUserAnswer = userAnswer.trim().toLowerCase();
+    notifyListeners();
+  }
+
   get wordings => _caesarCipher.words;
   get shift => _caesarCipher.shift;
   get numWords => _numWords;
   get currendEncoded => _currentEncoded;
   get isLoading => _isLoading;
+  get generatedPhrase => _generatePhrase;
+  get checkerUserAnswer => _checkerUserAnswer;
 }

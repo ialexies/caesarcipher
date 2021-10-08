@@ -1,4 +1,5 @@
-import 'package:caesarcipher/app/modules/encode/view/encode_view.dart';
+import 'package:caesarcipher/app/modules/encode_decode/view/decode_view.dart';
+import 'package:caesarcipher/app/modules/encode_decode/view/encode_view.dart';
 import 'package:caesarcipher/app/modules/validate/view/validated_view.dart';
 import 'package:flutter/material.dart';
 // import 'package:liquid_swipe/liquid_swipe.dart';
@@ -20,7 +21,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final pages = [
     EncodeView(),
-    ValidateView(),
+    Decode(),
+    // ValidateView(),
   ];
 
   @override

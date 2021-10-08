@@ -1,7 +1,8 @@
+// import 'package:caesarcipher/app/modules/encod_decode/controller/encoder_decoder_controller.dart';
+import 'package:caesarcipher/app/modules/encode_decode/controller/encoder_decoder_controller.dart';
+import 'package:caesarcipher/app/modules/encode_decode/model/caesarcipher.dart';
 import 'package:flutter/widgets.dart';
-
-import 'app/modules/encode/controller/encoder_decoder_controller.dart';
-import 'app/modules/encode/model/caesarcipher.dart';
+// import 'app/modules/encod_decode/controller/encoder_decoder_controller.dart';
 
 class GetItCipherNotifier extends ChangeNotifier {
   CaesarCipher _caesarCipher = CaesarCipher([], 0, false);

@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:caesarcipher/app/data/repository/repository.dart';
-import 'package:caesarcipher/app/modules/encode/model/caesarcipher.dart';
+// import 'package:caesarcipher/app/modules/encode/model/caesarcipher.dart';
+import 'package:caesarcipher/app/modules/encode_decode/model/caesarcipher.dart';
 
 class CaesarService {
   Repository repository = Repository();

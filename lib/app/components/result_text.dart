@@ -5,8 +5,11 @@ import 'package:get_it_mixin/get_it_mixin.dart';
 class ResultText extends StatelessWidget with GetItMixin {
   ResultText({
     // this.textResult = "Click the button generate phrase",
+    this.resultTextColor = Colors.black,
     Key? key,
   }) : super(key: key);
+
+  Color resultTextColor;
 
   // String textResult;
   @override
@@ -20,7 +23,10 @@ class ResultText extends StatelessWidget with GetItMixin {
         child: Text(
           getEncodedResult.join(" "),
           textAlign: TextAlign.center,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 25,
+              color: resultTextColor),
         ),
       )),
     );

@@ -1,6 +1,8 @@
 import 'package:caesarcipher/app/constants/box_decorations.dart';
-import 'package:caesarcipher/app/modules/encode/controller/encode_controller.dart';
-import 'package:caesarcipher/app/modules/encode/model/caesarcipher.dart';
+
+// import 'package:caesarcipher/app/modules/encode/model/caesarcipher.dart';
+import 'package:caesarcipher/app/modules/encode_decode/controller/encode_controller.dart';
+import 'package:caesarcipher/app/modules/encode_decode/model/caesarcipher.dart';
 import 'package:caesarcipher/cipher_notifier.dart';
 import 'package:flutter/material.dart';
 

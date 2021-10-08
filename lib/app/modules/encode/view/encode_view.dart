@@ -1,20 +1,25 @@
 import 'package:caesarcipher/app/components/encoder_input_group.dart';
 import 'package:caesarcipher/app/components/header.dart';
 import 'package:caesarcipher/app/components/result_text.dart';
+import 'package:caesarcipher/cipher_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:bordered_text/bordered_text.dart';
 import 'package:flutter/painting.dart';
 import 'package:caesarcipher/app/constants/box_decorations.dart';
+import 'package:get_it_mixin/get_it_mixin.dart';
 
-class EncodeView extends StatefulWidget {
+// class EncodeView extends StatefulWidget {
+//   const EncodeView({Key? key}) : super(key: key);
+
+//   @override
+//   _EncodeViewState createState() => _EncodeViewState();
+// }
+class EncodeView extends StatelessWidget {
   const EncodeView({Key? key}) : super(key: key);
 
-  @override
-  _EncodeViewState createState() => _EncodeViewState();
-}
-
-class _EncodeViewState extends State<EncodeView> {
+// class _EncodeViewState extends State<EncodeView> {
+// class EncodeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(

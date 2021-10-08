@@ -16,12 +16,13 @@ class EncoderInputGroup extends StatelessWidget with GetItMixin {
     final getCaeserCipherWords =
         watchOnly((GetItCipherNotifier x) => x.wordings);
     final getCaeserCipherShift = watchOnly((GetItCipherNotifier x) => x.shift);
+    final getNumWords = watchOnly((GetItCipherNotifier x) => x.numWords);
 
     TextEditingController numWordsController = TextEditingController();
     TextEditingController wordsController = TextEditingController();
 
     wordsController.text = getCaeserCipherWords.join(" ");
-    numWordsController.text = getCaeserCipherShift.toString();
+    numWordsController.text = getNumWords.toString();
 
     return Container(
       child: Padding(
@@ -47,7 +48,7 @@ class EncoderInputGroup extends StatelessWidget with GetItMixin {
                         } else {}
                       },
                       autovalidate: true,
-                      textAlign: TextAlign.center,
+                      // textAlign: TextAlign.center,
                       controller: numWordsController,
                       keyboardType:
                           TextInputType.numberWithOptions(decimal: false),
@@ -56,8 +57,8 @@ class EncoderInputGroup extends StatelessWidget with GetItMixin {
                       decoration: InputDecoration(
                         hintText: "Enter Number of words to generate",
                         hintStyle: TextStyle(fontSize: 8),
-                        suffixIcon: Icon(Icons.account_balance_wallet),
-                        alignLabelWithHint: true,
+                        // suffixIcon: Icon(Icons.account_balance_wallet),
+                        // alignLabelWithHint: true,
                         labelText: "Words",
                         contentPadding: EdgeInsets.all(5),
                         filled: true,
@@ -104,6 +105,12 @@ class EncoderInputGroup extends StatelessWidget with GetItMixin {
                       CaesarCipher response = await Encodecontroller()
                           .generateWords(int.parse(numWordsController.text));
                       get<GetItCipherNotifier>().generateWords(response);
+                      get<GetItCipherNotifier>()
+                          .updateNumWords(int.parse(numWordsController.text));
+                      FocusScope.of(context).unfocus();
+                      numWordsController.clear();
+                      // get<GetItCipherNotifier>().updateCurrentEncoded();
+                      // get<GetItCipherNotifier>().currendEncoded();
                     }
 
                     // ScaffoldMessenger.of(context).showSnackBar(

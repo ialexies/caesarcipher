@@ -15,11 +15,10 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   PageController _controller = PageController(
     initialPage: 0,
-    // scro
   );
   int pageIndex = 0;
 
-  final pages = const [
+  final pages = [
     EncodeView(),
     ValidateView(),
   ];
@@ -39,50 +38,50 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      // appBar: AppBar(
-      //   title: Text('CAESAR CIPHER'),
-      // ),
-      body: PageView(
-        controller: _controller,
-        // physics: BouncingScrollPhysics(),
-        physics: NeverScrollableScrollPhysics(),
-        children: pages,
-      ),
-
-      bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
-              topRight: Radius.circular(30), topLeft: Radius.circular(30)),
-          boxShadow: [
-            BoxShadow(color: Colors.black38, spreadRadius: 0, blurRadius: 10),
-          ],
-        ),
-        child: ClipRRect(
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(30.0),
-            topRight: Radius.circular(30.0),
+    return Stack(
+      children: [
+        Scaffold(
+          resizeToAvoidBottomInset: false,
+          body: PageView(
+            controller: _controller,
+            physics: NeverScrollableScrollPhysics(),
+            children: pages,
           ),
-          child: BottomNavigationBar(
-            unselectedItemColor: Colors.white,
-            selectedItemColor: Colors.amber[800],
-            backgroundColor: Colors.amber,
-            currentIndex: this.pageIndex,
-            onTap: ontap,
-            items: const [
-              BottomNavigationBarItem(
-                label: 'Encrypt',
-                icon: Icon(Icons.ac_unit),
+          bottomNavigationBar: Container(
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(30), topLeft: Radius.circular(30)),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black38, spreadRadius: 0, blurRadius: 10),
+              ],
+            ),
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(30.0),
+                topRight: Radius.circular(30.0),
               ),
-              BottomNavigationBarItem(
-                label: 'Decrypt',
-                icon: Icon(Icons.ac_unit),
+              child: BottomNavigationBar(
+                unselectedItemColor: Colors.white,
+                selectedItemColor: Colors.amber[800],
+                backgroundColor: Colors.amber,
+                currentIndex: this.pageIndex,
+                onTap: ontap,
+                items: const [
+                  BottomNavigationBarItem(
+                    label: 'Encrypt',
+                    icon: Icon(Icons.ac_unit),
+                  ),
+                  BottomNavigationBarItem(
+                    label: 'Decrypt',
+                    icon: Icon(Icons.ac_unit),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
-      ),
+      ],
     );
 
     // This trailing comma makes auto-formatting nicer for build methods.

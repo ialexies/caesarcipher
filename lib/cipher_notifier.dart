@@ -4,15 +4,15 @@ import 'app/modules/encode/controller/encoder_decoder_controller.dart';
 import 'app/modules/encode/model/caesarcipher.dart';
 
 class GetItCipherNotifier extends ChangeNotifier {
-  CaesarCipher _caesarCipher = CaesarCipher([], 1, false);
+  CaesarCipher _caesarCipher = CaesarCipher([], 0, false);
   List _currentEncoded = [];
-  int _numWords = 2;
+  int _numWords = 0;
+  bool _isLoading = false;
 
   generateWords(CaesarCipher response) {
-    List<String> sampleWord = [];
     _caesarCipher.words = response.words;
+    _caesarCipher.shift = response.shift;
 
-    // updateCurrentEncoded(_caesarCipher.words);
     updateCurrentEncoded(
         EncoderDecoderController().caesarCipherEncoder(response.words, shift));
 
@@ -29,8 +29,14 @@ class GetItCipherNotifier extends ChangeNotifier {
     return notifyListeners();
   }
 
+  updateIsLoading(bool val) {
+    _isLoading = val;
+    return notifyListeners();
+  }
+
   get wordings => _caesarCipher.words;
   get shift => _caesarCipher.shift;
   get numWords => _numWords;
   get currendEncoded => _currentEncoded;
+  get isLoading => _isLoading;
 }

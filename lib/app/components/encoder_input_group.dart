@@ -20,8 +20,10 @@ class EncoderInputGroup extends StatelessWidget with GetItMixin {
 
     TextEditingController numWordsController = TextEditingController();
     TextEditingController wordsController = TextEditingController();
+    TextEditingController shiftController = TextEditingController();
 
     wordsController.text = getCaeserCipherWords.join(" ");
+    shiftController.text = getCaeserCipherShift.toString();
     numWordsController.text = getNumWords.toString();
 
     return Container(
@@ -38,6 +40,7 @@ class EncoderInputGroup extends StatelessWidget with GetItMixin {
                 children: [
                   Expanded(
                     child: TextFormField(
+                      autofocus: true,
                       validator: (val) {
                         if (val!.isEmpty) {
                           return "Enter Number of Words";
@@ -47,8 +50,7 @@ class EncoderInputGroup extends StatelessWidget with GetItMixin {
                           return "Numbers too long, max of 5";
                         } else {}
                       },
-                      autovalidate: true,
-                      // textAlign: TextAlign.center,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
                       controller: numWordsController,
                       keyboardType:
                           TextInputType.numberWithOptions(decimal: false),
@@ -59,7 +61,7 @@ class EncoderInputGroup extends StatelessWidget with GetItMixin {
                         hintStyle: TextStyle(fontSize: 8),
                         // suffixIcon: Icon(Icons.account_balance_wallet),
                         // alignLabelWithHint: true,
-                        labelText: "Words",
+                        labelText: "Words Count",
                         contentPadding: EdgeInsets.all(5),
                         filled: true,
                         fillColor: Colors.white70,
@@ -68,7 +70,25 @@ class EncoderInputGroup extends StatelessWidget with GetItMixin {
                         ),
                       ),
                     ),
-                  )
+                  ),
+                  SizedBox(width: 5),
+                  Expanded(
+                    child: TextFormField(
+                      readOnly: true,
+                      controller: shiftController,
+                      decoration: InputDecoration(
+                        hintText: "Enter Number of words to generate",
+                        hintStyle: TextStyle(fontSize: 8),
+                        labelText: "Shift",
+                        contentPadding: EdgeInsets.all(5),
+                        filled: true,
+                        fillColor: Colors.white70,
+                        border: OutlineInputBorder(
+                          borderSide: new BorderSide(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
               const SizedBox(
@@ -78,6 +98,7 @@ class EncoderInputGroup extends StatelessWidget with GetItMixin {
                 children: [
                   Expanded(
                     child: TextField(
+                      readOnly: true,
                       controller: wordsController,
                       minLines: 3,
                       maxLines: 8,
@@ -100,33 +121,22 @@ class EncoderInputGroup extends StatelessWidget with GetItMixin {
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     if (_formKey.currentState!.validate()) {
-                      // print(numWordsController.text);
+                      try {
+                        get<GetItCipherNotifier>()
+                            .updateNumWords(int.parse(numWordsController.text));
+                        get<GetItCipherNotifier>().updateIsLoading(true);
+                        CaesarCipher response = await Encodecontroller()
+                            .generateWords(int.parse(numWordsController.text));
+                        get<GetItCipherNotifier>().generateWords(response);
 
-                      CaesarCipher response = await Encodecontroller()
-                          .generateWords(int.parse(numWordsController.text));
-                      get<GetItCipherNotifier>().generateWords(response);
-                      get<GetItCipherNotifier>()
-                          .updateNumWords(int.parse(numWordsController.text));
-                      FocusScope.of(context).unfocus();
-                      numWordsController.clear();
-                      // get<GetItCipherNotifier>().updateCurrentEncoded();
-                      // get<GetItCipherNotifier>().currendEncoded();
+                        FocusScope.of(context).unfocus();
+                        numWordsController.clear();
+                        get<GetItCipherNotifier>().updateIsLoading(false);
+                      } catch (e) {}
                     }
-
-                    // ScaffoldMessenger.of(context).showSnackBar(
-                    //   const SnackBar(content: Text('Processing Data')),
-                    // );
-                    // Fluttertoast.showToast(
-                    //     msg: "This is Center Short Toast",
-                    //     toastLength: Toast.LENGTH_SHORT,
-                    //     gravity: ToastGravity.CENTER,
-                    //     timeInSecForIosWeb: 1,
-                    //     backgroundColor: Colors.red,
-                    //     textColor: Colors.white,
-                    //     fontSize: 16.0);
                   }
                 },
-                child: Text(
+                child: const Text(
                   "Generate Phrase",
                   style: const TextStyle(fontSize: 10),
                 ),

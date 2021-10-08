@@ -9,19 +9,12 @@ import 'package:flutter/painting.dart';
 import 'package:caesarcipher/app/constants/box_decorations.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
 
-// class EncodeView extends StatefulWidget {
-//   const EncodeView({Key? key}) : super(key: key);
+class EncodeView extends StatelessWidget with GetItMixin {
+  // const EncodeView({Key? key}) : super(key: key);
 
-//   @override
-//   _EncodeViewState createState() => _EncodeViewState();
-// }
-class EncodeView extends StatelessWidget {
-  const EncodeView({Key? key}) : super(key: key);
-
-// class _EncodeViewState extends State<EncodeView> {
-// class EncodeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final getIsLoading = watchOnly((GetItCipherNotifier x) => x.isLoading);
     return Container(
         color: Colors.white,
         child: Stack(
@@ -48,6 +41,14 @@ class EncodeView extends StatelessWidget {
                 ],
               ),
             ),
+            getIsLoading
+                ? Container(
+                    width: double.infinity,
+                    height: double.infinity,
+                    color: Colors.black.withOpacity(.8),
+                    child: Center(child: CircularProgressIndicator()),
+                  )
+                : Text('')
           ],
         ));
   }

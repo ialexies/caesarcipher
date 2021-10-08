@@ -10,7 +10,7 @@ class Repository {
 
   httpGetShift() async {
     final Uri _urlNumber = Uri.parse(
-        "http://www.randomnumberapi.com/api/v1.0/random?min=1&max=25&count=1");
+        "http://www.randomnumberapi.com/api/v1.0/random?min=1&max=5&count=1");
     return await http.get(_urlNumber);
   }
 }

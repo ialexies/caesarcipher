@@ -8,9 +8,9 @@ class GetItCipherNotifier extends ChangeNotifier {
   CaesarCipher _caesarCipher = CaesarCipher([], 0, false);
   List _generatePhrase = [];
   List _currentEncoded = [];
+  String _checkerResult = "Unvalidated";
   int _numWords = 0;
   bool _isLoading = false;
-
   String _checkerUserAnswer = "ss";
 
   generateWords(CaesarCipher response) {
@@ -45,6 +45,11 @@ class GetItCipherNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  updateCheckerResult(String resultString) {
+    _checkerResult = resultString;
+    notifyListeners();
+  }
+
   get wordings => _caesarCipher.words;
   get shift => _caesarCipher.shift;
   get numWords => _numWords;
@@ -52,4 +57,5 @@ class GetItCipherNotifier extends ChangeNotifier {
   get isLoading => _isLoading;
   get generatedPhrase => _generatePhrase;
   get checkerUserAnswer => _checkerUserAnswer;
+  get checkerResult => _checkerResult;
 }

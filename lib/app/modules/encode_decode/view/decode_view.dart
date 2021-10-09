@@ -41,6 +41,7 @@ class Decode extends StatelessWidget with GetItMixin {
                   CheckerWidgetGroup(),
                   ResultText(
                     resultTextColor: Colors.orange,
+                    isCheckerPage: true,
                   ),
                 ],
               ),

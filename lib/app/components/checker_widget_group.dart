@@ -16,7 +16,7 @@ class CheckerWidgetGroup extends StatelessWidget with GetItMixin {
   static final _userAnswerFormKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    double inputGroupCheckerHeight = 250;
+    double inputGroupCheckerHeight = 260;
     int shift = 3;
     final getEncodedResult =
         watchOnly((GetItCipherNotifier x) => x.currendEncoded);
@@ -30,6 +30,8 @@ class CheckerWidgetGroup extends StatelessWidget with GetItMixin {
     TextEditingController userAnswerController = TextEditingController();
     // userAnswerController.text = getCheckerUswerAnswer;
     encodedPhraseController.text = getEncodedResult.join(" ");
+
+    final isKeyboard = MediaQuery.of(context).viewInsets.bottom != 0;
 
     String userAnswer = "";
 
@@ -49,29 +51,30 @@ class CheckerWidgetGroup extends StatelessWidget with GetItMixin {
                   child: Column(
                     children: [
                       Text('No. of Shifts ${getCaeserCipherShift.toString()}'),
-                      // Text('No. of Shifts $shift'),
                       TextField(
-                        minLines: 1,
+                        minLines: 6,
                         maxLines: 8,
                         controller: encodedPhraseController,
                         decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             hintText: 'Enter a search term'),
                       ),
-
                       ElevatedButton(
-                          onPressed: () async {
-                            get<GetItCipherNotifier>().updateNumWords(2);
+                        onPressed: () async {
+                          get<GetItCipherNotifier>().updateNumWords(2);
+                          CaesarCipher response =
+                              await Encodecontroller().generateWords(1);
 
-                            CaesarCipher response =
-                                await Encodecontroller().generateWords(1);
-
-                            get<GetItCipherNotifier>().generateWords(response);
-                            // encodedPhraseController.text = await "fdfdf";
-                            // encodedPhraseController.text =
-                            //     getEncodedResult.join(" ");
-                          },
-                          child: Text("Generate Code"))
+                          get<GetItCipherNotifier>().generateWords(response);
+                        },
+                        child: Text(
+                          "Generate Code",
+                          style: TextStyle(
+                            fontSize: 10,
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(primary: Colors.amber),
+                      ),
                     ],
                   ),
                 ),
@@ -91,38 +94,51 @@ class CheckerWidgetGroup extends StatelessWidget with GetItMixin {
                     child: Column(
                       children: [
                         Text('Your Answer Here'),
-                        // Text('No. of Shifts $shift'),
                         TextFormField(
+                          minLines: 6,
+                          maxLines: 8,
+                          textCapitalization: TextCapitalization.,
                           onChanged: (text) {
                             get<GetItCipherNotifier>()
                                 .updateCheckerUserAnswer(text);
-                            // print(text);
-                            // userAnswer = text;
                           },
-                          // controller: userAnswerController,
                           decoration: const InputDecoration(
                               border: OutlineInputBorder(),
                               hintText: 'Enter a search term'),
                         ),
                         ElevatedButton(
-                            onPressed: () async {
-                              // print(userAnswer);
-                              // get<GetItCipherNotifier>().updateNumWords(2);
-                              // CaesarCipher response =
-                              //     await Encodecontroller().generateWords(1);
-                              // get<GetItCipherNotifier>().generateWords(response);
-                              // print(getCheckerUswerAnswer.toString());
-                              if (getCheckerUswerAnswer
-                                      .toString()
-                                      .toLowerCase() ==
-                                  getGeneratedPhrase.join(" ")) {
-                                print('valid');
-                              } else {
-                                print('invalid');
+                          onPressed: () async {
+                            if (getCheckerUswerAnswer
+                                    .toString()
+                                    .toLowerCase() ==
+                                getGeneratedPhrase.join(" ")) {
+                              // print('valid');
+                              get<GetItCipherNotifier>()
+                                  .updateCheckerResult('Valid');
+                              FocusScopeNode currentFocus =
+                                  FocusScope.of(context);
+                              if (!currentFocus.hasPrimaryFocus) {
+                                currentFocus.unfocus();
                               }
-                            },
-                            child: Text("Validate")),
-                        Text(getGeneratedPhrase.join(" "))
+                            } else {
+                              // print('invalid');
+                              get<GetItCipherNotifier>()
+                                  .updateCheckerResult('Invalid');
+                              FocusScopeNode currentFocus =
+                                  FocusScope.of(context);
+                              if (!currentFocus.hasPrimaryFocus) {
+                                currentFocus.unfocus();
+                              }
+                            }
+                          },
+                          child: Text("Validate"),
+                          style:
+                              ElevatedButton.styleFrom(primary: Colors.amber),
+                        ),
+                        Text(
+                          getGeneratedPhrase.join(" "),
+                          style: TextStyle(fontSize: 8),
+                        ) //Checker of the right answer
                       ],
                     ),
                   ),
@@ -133,7 +149,8 @@ class CheckerWidgetGroup extends StatelessWidget with GetItMixin {
           ],
         ),
       ),
-      margin: EdgeInsets.only(top: 180),
+      // margin: EdgeInsets.only(top: 180),
+      margin: isKeyboard ? EdgeInsets.only(top: 20) : EdgeInsets.only(top: 180),
       // width: 250,
     );
   }
@@ -141,11 +158,11 @@ class CheckerWidgetGroup extends StatelessWidget with GetItMixin {
   BoxDecoration decodeCheckerContainerDecoration() {
     return BoxDecoration(
       // color: const Color.fromRGBO(15, 211, 223, 1),
-      color: Colors.blueGrey,
+      color: Colors.white,
       borderRadius: const BorderRadius.all(Radius.circular(20)),
       border: Border.all(
-        color: Colors.white.withOpacity(.5),
-        width: 3,
+        color: Colors.grey.withOpacity(.5),
+        width: 1,
       ),
     );
   }

@@ -5,13 +5,20 @@ In cryptography, a Caesar cipher, also known as Caesar's cipher, the shift ciphe
 
 * For more info: https://en.wikipedia.org/wiki/Caesar_cipher 
 * Web Sample: https://www.dcode.fr/caesar-cipher
-* Mockup https://www.figma.com/file/RkGJlxvvZHbq6crfg33YW8/Untitled?node-id=0%3A1
+ 
+
 
 ## Purpose & Goal
 This project will serve as demo app for assestment and portfolio of the developer. Future updates will be applied and will be hosted in playstore. The goal is create an app that processes two flows in two different pages, using APIs.
 * Generates random words, then encodes them using the caesar cipher
 * Generates an encoded sentence showing the shift, an asks the user to decode i
-* ![alt text](https://i.imgur.com/dNjhLYy.png)
+
+
+## Mockup
+* Figma https://www.figma.com/file/RkGJlxvvZHbq6crfg33YW8/Untitled?node-id=0%3A1
+* Mockup Demo UX  https://www.figma.com/file/RkGJlxvvZHbq6crfg33YW8/Untitled?node-id=0%3A1
+* * ![alt text](https://i.imgur.com/dNjhLYy.png)
+
 
 ## Flow Chart
 * Web Sample: https://drive.google.com/file/d/1fpVBkmqj9t_YdCFj4U1LQUMptP1cL6lJ/view?usp=sharing

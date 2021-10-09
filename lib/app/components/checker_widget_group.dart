@@ -1,15 +1,8 @@
-import 'package:caesarcipher/app/components/result_text.dart';
-import 'package:caesarcipher/app/constants/box_decorations.dart';
-
-// import 'package:caesarcipher/app/modules/encode/model/caesarcipher.dart';
 import 'package:caesarcipher/app/modules/encode_decode/controller/encode_controller.dart';
 import 'package:caesarcipher/app/modules/encode_decode/model/caesarcipher.dart';
 import 'package:caesarcipher/cipher_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:get_it_mixin/get_it_mixin.dart';
 
@@ -18,7 +11,7 @@ class CheckerWidgetGroup extends StatelessWidget with GetItMixin {
   @override
   Widget build(BuildContext context) {
     double inputGroupCheckerHeight = 300;
-    int shift = 3;
+
     final getEncodedResult =
         watchOnly((GetItCipherNotifier x) => x.currendEncoded);
     final getCaeserCipherShift = watchOnly((GetItCipherNotifier x) => x.shift);
@@ -28,13 +21,11 @@ class CheckerWidgetGroup extends StatelessWidget with GetItMixin {
         watchOnly((GetItCipherNotifier x) => x.checkerUserAnswer);
 
     final encodedPhraseController = TextEditingController();
-    TextEditingController userAnswerController = TextEditingController();
+
     // userAnswerController.text = getCheckerUswerAnswer;
     encodedPhraseController.text = getEncodedResult.join(" ");
 
     final isKeyboard = MediaQuery.of(context).viewInsets.bottom != 0;
-
-    String userAnswer = "";
 
     return Container(
       child: Padding(
@@ -57,11 +48,12 @@ class CheckerWidgetGroup extends StatelessWidget with GetItMixin {
                         child: Text(
                           'No. of\nShifts ${getCaeserCipherShift.toString()}'
                               .toUpperCase(),
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
                           textAlign: TextAlign.center,
                         ),
                       ),
                       TextField(
+                        readOnly: true,
                         minLines: 6,
                         maxLines: 8,
                         controller: encodedPhraseController,
@@ -71,13 +63,15 @@ class CheckerWidgetGroup extends StatelessWidget with GetItMixin {
                       ),
                       ElevatedButton(
                         onPressed: () async {
+                          get<GetItCipherNotifier>().updateIsLoading(true);
                           get<GetItCipherNotifier>().updateNumWords(2);
                           CaesarCipher response =
                               await Encodecontroller().generateWords(1);
 
                           get<GetItCipherNotifier>().generateWords(response);
+                          get<GetItCipherNotifier>().updateIsLoading(false);
                         },
-                        child: Text(
+                        child: const Text(
                           "Generate Code",
                           style: TextStyle(
                             fontSize: 10,
@@ -92,7 +86,7 @@ class CheckerWidgetGroup extends StatelessWidget with GetItMixin {
                 decoration: decodeCheckerContainerDecoration(),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Flexible(
@@ -110,7 +104,7 @@ class CheckerWidgetGroup extends StatelessWidget with GetItMixin {
                           child: Text(
                             'Your\nAnswer Here'.toUpperCase(),
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -129,6 +123,7 @@ class CheckerWidgetGroup extends StatelessWidget with GetItMixin {
                         ),
                         ElevatedButton(
                           onPressed: () async {
+                            get<GetItCipherNotifier>().updateIsLoading(true);
                             if (getCheckerUswerAnswer
                                     .toString()
                                     .toLowerCase() ==
@@ -141,6 +136,11 @@ class CheckerWidgetGroup extends StatelessWidget with GetItMixin {
                               if (!currentFocus.hasPrimaryFocus) {
                                 currentFocus.unfocus();
                               }
+                              Future.delayed(const Duration(milliseconds: 800),
+                                  () {
+                                get<GetItCipherNotifier>()
+                                    .updateIsLoading(false);
+                              });
                             } else {
                               // print('invalid');
                               get<GetItCipherNotifier>()
@@ -150,15 +150,22 @@ class CheckerWidgetGroup extends StatelessWidget with GetItMixin {
                               if (!currentFocus.hasPrimaryFocus) {
                                 currentFocus.unfocus();
                               }
+                              Future.delayed(const Duration(milliseconds: 800),
+                                  () {
+                                get<GetItCipherNotifier>()
+                                    .updateIsLoading(false);
+                              });
                             }
+
+                            // get<GetItCipherNotifier>().updateIsLoading(false);
                           },
-                          child: Text("Validate"),
+                          child: const Text("Validate"),
                           style:
                               ElevatedButton.styleFrom(primary: Colors.amber),
                         ),
                         Text(
                           "\"${getGeneratedPhrase.join(' ')}\"",
-                          style: TextStyle(fontSize: 8),
+                          style: const TextStyle(fontSize: 8),
                         ) //Checker of the right answer
                       ],
                     ),

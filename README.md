@@ -1,6 +1,5 @@
 # caesarcipher
 
-A new Flutter project.
 
 ## Getting Started
 

@@ -28,7 +28,9 @@ class EncoderInputGroup extends StatelessWidget with GetItMixin {
     shiftController.text = getCaeserCipherShift.toString();
     numWordsController.text = getNumWords.toString();
 
-    return Container(
+    return AnimatedContainer(
+      duration: Duration(seconds: 2),
+      curve: Curves.bounceIn,
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 20,

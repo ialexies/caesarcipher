@@ -1,11 +1,9 @@
 import 'package:caesarcipher/app/components/checker_widget_group.dart';
-import 'package:caesarcipher/app/components/encoder_input_group.dart';
 import 'package:caesarcipher/app/components/header.dart';
 import 'package:caesarcipher/app/components/result_text.dart';
 import 'package:caesarcipher/cipher_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:bordered_text/bordered_text.dart';
 import 'package:flutter/painting.dart';
 import 'package:caesarcipher/app/constants/box_decorations.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
@@ -37,7 +35,6 @@ class Decode extends StatelessWidget with GetItMixin {
               alignment: Alignment.topCenter,
               child: Column(
                 children: [
-                  // EncoderInputGroup(),
                   CheckerWidgetGroup(),
                   ResultText(
                     resultTextColor: Colors.orange,
@@ -46,14 +43,14 @@ class Decode extends StatelessWidget with GetItMixin {
                 ],
               ),
             ),
-            getIsLoading
-                ? Container(
-                    width: double.infinity,
-                    height: double.infinity,
-                    color: Colors.black.withOpacity(.8),
-                    child: Center(child: CircularProgressIndicator()),
-                  )
-                : Text('')
+            // getIsLoading
+            //     ? Container(
+            //         width: double.infinity,
+            //         height: double.infinity,
+            //         color: Colors.black.withOpacity(.8),
+            //         child: Center(child: CircularProgressIndicator()),
+            //       )
+            //     : Text('')
           ],
         ));
   }

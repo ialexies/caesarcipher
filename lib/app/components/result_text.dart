@@ -1,3 +1,4 @@
+import 'package:bordered_text/bordered_text.dart';
 import 'package:caesarcipher/cipher_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it_mixin/get_it_mixin.dart';
@@ -42,13 +43,17 @@ class ResultText extends StatelessWidget with GetItMixin {
       child: Center(
           child: Padding(
         padding: const EdgeInsets.all(30.0),
-        child: Text(
-          textToDisplay,
-          textAlign: TextAlign.center,
-          style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 25,
-              color: resultTextColor),
+        child: BorderedText(
+          strokeWidth: 10,
+          strokeColor: Colors.white,
+          child: Text(
+            textToDisplay,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 25,
+                color: resultTextColor),
+          ),
         ),
       )),
     );

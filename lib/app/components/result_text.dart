@@ -24,7 +24,16 @@ class ResultText extends StatelessWidget with GetItMixin {
     dynamic textToDisplay;
 
     if (isCheckerPage == true) {
-      textToDisplay = getCheckerResult.toString();
+      if (getEncodedResult.length > 0) {
+        textToDisplay = getCheckerResult.toString();
+      }
+      // else if (getEncodedResult.length > 0 &&
+      //     getCheckerResult == "Unvalidated") {
+      //   textToDisplay = "\"Click Validate\"";
+      // }
+      else {
+        textToDisplay = "\"Click Generate Code\"";
+      }
     } else {
       textToDisplay = getEncodedResult.join(" ");
     }

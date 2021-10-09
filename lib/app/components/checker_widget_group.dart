@@ -5,6 +5,7 @@ import 'package:caesarcipher/app/constants/box_decorations.dart';
 import 'package:caesarcipher/app/modules/encode_decode/controller/encode_controller.dart';
 import 'package:caesarcipher/app/modules/encode_decode/model/caesarcipher.dart';
 import 'package:caesarcipher/cipher_notifier.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
@@ -16,7 +17,7 @@ class CheckerWidgetGroup extends StatelessWidget with GetItMixin {
   static final _userAnswerFormKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    double inputGroupCheckerHeight = 260;
+    double inputGroupCheckerHeight = 300;
     int shift = 3;
     final getEncodedResult =
         watchOnly((GetItCipherNotifier x) => x.currendEncoded);
@@ -50,7 +51,16 @@ class CheckerWidgetGroup extends StatelessWidget with GetItMixin {
                   padding: const EdgeInsets.all(15.0),
                   child: Column(
                     children: [
-                      Text('No. of Shifts ${getCaeserCipherShift.toString()}'),
+                      // SizedBox(height: 10),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'No. of\nShifts ${getCaeserCipherShift.toString()}'
+                              .toUpperCase(),
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
                       TextField(
                         minLines: 6,
                         maxLines: 8,
@@ -72,6 +82,7 @@ class CheckerWidgetGroup extends StatelessWidget with GetItMixin {
                           style: TextStyle(
                             fontSize: 10,
                           ),
+                          textAlign: TextAlign.center,
                         ),
                         style: ElevatedButton.styleFrom(primary: Colors.amber),
                       ),
@@ -93,11 +104,21 @@ class CheckerWidgetGroup extends StatelessWidget with GetItMixin {
                     key: _userAnswerFormKey,
                     child: Column(
                       children: [
-                        Text('Your Answer Here'),
+                        // SizedBox(height: 20),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'Your\nAnswer Here'.toUpperCase(),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
                         TextFormField(
                           minLines: 6,
                           maxLines: 8,
-                          textCapitalization: TextCapitalization.,
+                          // textCapitalization: TextCapitalization.,
                           onChanged: (text) {
                             get<GetItCipherNotifier>()
                                 .updateCheckerUserAnswer(text);
@@ -136,7 +157,7 @@ class CheckerWidgetGroup extends StatelessWidget with GetItMixin {
                               ElevatedButton.styleFrom(primary: Colors.amber),
                         ),
                         Text(
-                          getGeneratedPhrase.join(" "),
+                          "\"${getGeneratedPhrase.join(' ')}\"",
                           style: TextStyle(fontSize: 8),
                         ) //Checker of the right answer
                       ],

@@ -8,10 +8,10 @@ class GetItCipherNotifier extends ChangeNotifier {
   CaesarCipher _caesarCipher = CaesarCipher([], 0, false);
   List _generatePhrase = [];
   List _currentEncoded = [];
-  String _checkerResult = "Unvalidated";
+  String _checkerResult = "\"Click Validate\"";
   int _numWords = 0;
   bool _isLoading = false;
-  String _checkerUserAnswer = "ss";
+  String _checkerUserAnswer = "";
 
   generateWords(CaesarCipher response) {
     _caesarCipher.words = response.words;

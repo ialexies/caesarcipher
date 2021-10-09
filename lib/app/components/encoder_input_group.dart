@@ -42,6 +42,13 @@ class EncoderInputGroup extends StatelessWidget with GetItMixin {
                 children: [
                   Expanded(
                     child: TextFormField(
+                      onChanged: (text) {
+                        if (text != "") {
+                          get<GetItCipherNotifier>().updateNumWords(
+                              // int.parse((getNumWords.toString() + text)));
+                              int.parse(text));
+                        }
+                      },
                       autofocus: true,
                       validator: (val) {
                         if (val!.isEmpty) {
@@ -53,7 +60,7 @@ class EncoderInputGroup extends StatelessWidget with GetItMixin {
                         } else {}
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
-                      controller: numWordsController,
+                      // controller: numWordsController,
                       keyboardType:
                           TextInputType.numberWithOptions(decimal: false),
                       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
@@ -61,8 +68,6 @@ class EncoderInputGroup extends StatelessWidget with GetItMixin {
                       decoration: InputDecoration(
                         hintText: "Enter Number of words to generate",
                         hintStyle: TextStyle(fontSize: 8),
-                        // suffixIcon: Icon(Icons.account_balance_wallet),
-                        // alignLabelWithHint: true,
                         labelText: "Words Count",
                         contentPadding: EdgeInsets.all(5),
                         filled: true,

@@ -6,7 +6,7 @@ import 'app/modules/home/view/home_view.dart';
 import 'cipher_notifier.dart';
 import 'locator.dart';
 
-void main() {
+main() {
   setup();
   runApp(MyApp());
 }

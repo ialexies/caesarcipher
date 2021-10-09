@@ -71,11 +71,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 onTap: ontap,
                 items: const [
                   BottomNavigationBarItem(
-                    label: 'Encrypt',
+                    label: 'Generate Code',
                     icon: Icon(Icons.ac_unit),
                   ),
                   BottomNavigationBarItem(
-                    label: 'Decrypt',
+                    label: 'Checker',
                     icon: Icon(Icons.ac_unit),
                   ),
                 ],
